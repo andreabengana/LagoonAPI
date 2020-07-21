@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LagoonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="~TMPCLP386101">
+    <Key>
+      <PropertyRef Name="ID_Favourite" />
+    </Key>
+    <Property Name="ID_Favourite" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_StoreProduct" Type="int" />
+  </EntityType>
+  <EntityType Name="Order_Detail">
+    <Key>
+      <PropertyRef Name="ID_Order" />
+    </Key>
+    <Property Name="ID_Order" Type="int" Nullable="false" />
+    <Property Name="ID_StoreProduct" Type="int" />
+    <Property Name="CashAmount" Type="int" />
+    <Property Name="TotalAmount" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="PickupTime" Type="datetime2" Precision="0" />
+    <Property Name="Status" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID_Product" />
+    </Key>
+    <Property Name="ID_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProductImage" Type="varchar" MaxLength="8000" />
+    <Property Name="Price" Type="int" />
+    <Property Name="PreparationTime" Type="datetime2" Precision="0" />
+    <Property Name="ProductType" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProductDescription" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Product_Feedback">
+    <Key>
+      <PropertyRef Name="ID_ProductFeedback" />
+    </Key>
+    <Property Name="ID_ProductFeedback" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_StoreProduct" Type="int" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProductFeedback" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="ID_Store" />
+    </Key>
+    <Property Name="ID_Store" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StoreName" Type="nvarchar" MaxLength="255" />
+    <Property Name="StoreLocation" Type="nvarchar" MaxLength="255" />
+    <Property Name="StorePicture" Type="varchar" MaxLength="8000" />
+    <Property Name="StoreDescription" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Store_Feedback">
+    <Key>
+      <PropertyRef Name="ID_StoreFeedback" />
+    </Key>
+    <Property Name="ID_StoreFeedback" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Store" Type="int" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="255" />
+    <Property Name="StoreFeedback" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Store_Product">
+    <Key>
+      <PropertyRef Name="ID_StoreProduct" />
+    </Key>
+    <Property Name="ID_StoreProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Store" Type="int" />
+    <Property Name="ID_Product" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Vendor_Order_Detail">
+    <Key>
+      <PropertyRef Name="ID_Order" />
+    </Key>
+    <Property Name="ID_Order" Type="int" Nullable="false" />
+    <Property Name="ID_StoreProduct" Type="int" />
+    <Property Name="CashAmount" Type="int" />
+    <Property Name="TotalAmount" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="PickupTime" Type="datetime2" Precision="7" />
+    <Property Name="Status" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="ORDER_DETAIL$STORE_PRODUCTORDER_DETAIL">
+    <End Role="Store_Product" Type="Self.Store_Product" Multiplicity="0..1" />
+    <End Role="Order_Detail" Type="Self.Order_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store_Product">
+        <PropertyRef Name="ID_StoreProduct" />
+      </Principal>
+      <Dependent Role="Order_Detail">
+        <PropertyRef Name="ID_StoreProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PRODUCT_FEEDBACK$STORE_PRODUCTPRODUCT_FEEDBACK">
+    <End Role="Store_Product" Type="Self.Store_Product" Multiplicity="0..1" />
+    <End Role="Product_Feedback" Type="Self.Product_Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store_Product">
+        <PropertyRef Name="ID_StoreProduct" />
+      </Principal>
+      <Dependent Role="Product_Feedback">
+        <PropertyRef Name="ID_StoreProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="STORE_FEEDBACK$STORESTORE_FEEDBACK">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Store_Feedback" Type="Self.Store_Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="ID_Store" />
+      </Principal>
+      <Dependent Role="Store_Feedback">
+        <PropertyRef Name="ID_Store" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="STORE_PRODUCT$PRODUCTSTORE_PRODUCT">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Store_Product" Type="Self.Store_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID_Product" />
+      </Principal>
+      <Dependent Role="Store_Product">
+        <PropertyRef Name="ID_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="STORE_PRODUCT$STORESTORE_PRODUCT">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Store_Product" Type="Self.Store_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="ID_Store" />
+      </Principal>
+      <Dependent Role="Store_Product">
+        <PropertyRef Name="ID_Store" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LagoonModelStoreContainer">
+    <EntitySet Name="~TMPCLP386101" EntityType="Self.~TMPCLP386101" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Detail" EntityType="Self.Order_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Feedback" EntityType="Self.Product_Feedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Store_Feedback" EntityType="Self.Store_Feedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Store_Product" EntityType="Self.Store_Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendor_Order_Detail" EntityType="Self.Vendor_Order_Detail" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="ORDER_DETAIL$STORE_PRODUCTORDER_DETAIL" Association="Self.ORDER_DETAIL$STORE_PRODUCTORDER_DETAIL">
+      <End Role="Store_Product" EntitySet="Store_Product" />
+      <End Role="Order_Detail" EntitySet="Order_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="PRODUCT_FEEDBACK$STORE_PRODUCTPRODUCT_FEEDBACK" Association="Self.PRODUCT_FEEDBACK$STORE_PRODUCTPRODUCT_FEEDBACK">
+      <End Role="Store_Product" EntitySet="Store_Product" />
+      <End Role="Product_Feedback" EntitySet="Product_Feedback" />
+    </AssociationSet>
+    <AssociationSet Name="STORE_FEEDBACK$STORESTORE_FEEDBACK" Association="Self.STORE_FEEDBACK$STORESTORE_FEEDBACK">
+      <End Role="Store" EntitySet="Store" />
+      <End Role="Store_Feedback" EntitySet="Store_Feedback" />
+    </AssociationSet>
+    <AssociationSet Name="STORE_PRODUCT$PRODUCTSTORE_PRODUCT" Association="Self.STORE_PRODUCT$PRODUCTSTORE_PRODUCT">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Store_Product" EntitySet="Store_Product" />
+    </AssociationSet>
+    <AssociationSet Name="STORE_PRODUCT$STORESTORE_PRODUCT" Association="Self.STORE_PRODUCT$STORESTORE_PRODUCT">
+      <End Role="Store" EntitySet="Store" />
+      <End Role="Store_Product" EntitySet="Store_Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

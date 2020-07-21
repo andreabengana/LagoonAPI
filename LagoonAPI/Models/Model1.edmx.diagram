@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9095f07426034247bb7bbec939f3717c" Name="Diagram1">
+        <EntityTypeShape EntityType="LagoonModel.C_TMPCLP386101" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LagoonModel.Order_Detail" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LagoonModel.Product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LagoonModel.Product_Feedback" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LagoonModel.Store" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LagoonModel.Store_Feedback" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LagoonModel.Store_Product" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LagoonModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LagoonModel.Vendor_Order_Detail" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <AssociationConnector Association="LagoonModel.ORDER_DETAIL_STORE_PRODUCTORDER_DETAIL" ManuallyRouted="false" />
+        <AssociationConnector Association="LagoonModel.STORE_PRODUCT_PRODUCTSTORE_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="LagoonModel.PRODUCT_FEEDBACK_STORE_PRODUCTPRODUCT_FEEDBACK" ManuallyRouted="false" />
+        <AssociationConnector Association="LagoonModel.STORE_FEEDBACK_STORESTORE_FEEDBACK" ManuallyRouted="false" />
+        <AssociationConnector Association="LagoonModel.STORE_PRODUCT_STORESTORE_PRODUCT" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
